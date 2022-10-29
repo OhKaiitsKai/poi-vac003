@@ -6,7 +6,7 @@ import './App.scss';
 
 function App  ()  {
     return (
-     <Register/>
+     <Login/>
     )
 }
 
