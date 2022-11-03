@@ -1,19 +1,19 @@
 /* FORM STYLES */
 
-@mixin mobile {
-  @media screen and (max-width: 480px) {
-      @content
-  }
-}
-
 @mixin tablet {
-  @media screen and (max-width: 760px) {
+  @media screen and (max-width: 915px) and (min-width: 612px) {
       @content
   }
 }
 
 @mixin laptop {
-  @media screen and (max-width: 1200px) {
+  @media screen  and (min-width: 915px)  {
+      @content
+  }
+}
+
+@mixin mobile {
+  @media screen and (max-width: 612px) {
       @content
   }
 }
@@ -99,14 +99,19 @@ justify-content: center;
 .container{
   border: 1px solid white;
   border-radius: 10px;
-  width: 65%;
+  width:75%;
   height: 80%;
   display:flex;
   overflow: hidden;
 
+
   @include tablet{
       width: 90%;
      }
+
+  @include mobile{
+  width: 90%;
+  }
 
   .sidebar{
     flex: 1;
@@ -127,11 +132,20 @@ justify-content: center;
         @include tablet{
           display: none;
          }
+         @include mobile{
+          display: none;
+         }
       }
 
       .user{
         display: contents;
         gap: 10px;
+
+        span{
+          @include mobile{
+            display: none;
+           }
+        }
 
         img{
           background-color: #c6b4dd;
@@ -148,14 +162,24 @@ justify-content: center;
           cursor: pointer;
 
           @include tablet{
-              position: absolute;
-              bottom: 10px;
-             }
+            position: absolute;
+            bottom: 10px;
+           }
+           @include mobile{
+            position: absolute;
+            bottom: 10px;
+           }
         }
       }
+
+      @include mobile(){
+        justify-content: start;
+      }
+
     }
 
 .chatroom{
+  padding: 10px;
   border-bottom:3px #bfc6e0;
   background-color: #958cbb;
   align-items: center;
@@ -170,6 +194,22 @@ img{
           border-radius: 50%;
           object-fit: cover;
 }
+
+.roomtxt{
+  @include mobile{
+    display: none;
+   }
+}
+
+@include mobile(){
+  justify-content: start;
+}
+
+&:hover{
+  filter: brightness(1.5);
+}
+
+
 }
     .search{
 
@@ -214,7 +254,16 @@ img{
       .userChatInfo{
           span{font-size: 18px; font-weight: bold;}
           p{font-size: 14px; color: rgb(235, 235, 235);line-height:0px;}
-      }
+      
+          @include mobile(){
+            display: none;
+           }
+
+          @include mobile(){
+            justify-content: start;
+          }
+          
+        }
       
   }
 
@@ -256,7 +305,7 @@ img{
 
           .messageInfo{
               display:flex;
-
+              
               flex-direction: column;
               color: rgb(184, 183, 183);               
               font-weight: 300;
@@ -282,7 +331,13 @@ img{
                   max-width: max-content;
               }
               img{
-                  width: 50%;
+                width: 80%;
+                @include mobile(){
+                  width: 90%;
+                }
+                @include tablet(){
+                  width: 80%;
+                }
               }
           }
 
@@ -329,12 +384,36 @@ img{
           align-items: center;
           gap: 10px;
 
+          .send-icon{
+            cursor:pointer;
+            color:none;
+            border:none;
+
+            @include laptop(){
+              display: none;
+            }
+            @include tablet(){
+              display: none;
+            }
+
+            &:hover{
+              filter: brightness(1.75);
+              opacity: 30%;
+            }
+          }
+
           img{
               height: 24px;
               cursor:pointer;
           }
 
-          button{
+          .custom-img{
+            @include mobile(){
+              display: none;
+            }
+          }
+
+          .send-button{
               border:none;
               border-radius: 10px;
               padding: 10px 15px;
@@ -342,8 +421,12 @@ img{
               background-color:#a382a7;
               cursor: pointer;
               
+              @include mobile(){
+                display: none;
+              }
+
           }
-          button:hover{
+          .send-button:hover{
             border: #7c5d80;
             background-color:rgb(223, 183, 212);
             color: #8d6d91;
@@ -356,6 +439,10 @@ img{
 
     }
     
+    @include mobile(){
+      flex:4;
+    }
+
   }
 }
 }
