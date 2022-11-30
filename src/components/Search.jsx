@@ -9,12 +9,15 @@ import {
   updateDoc,
   serverTimestamp,
   getDoc,
+  arrayUnion,
+  Timestamp
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { AuthContext } from "../context/AuthContext";
 const Search = () => {
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
+  const [room, setRoom] = useState(false);
   const [err, setErr] = useState(false);
 
   const { currentUser } = useContext(AuthContext);
@@ -24,11 +27,21 @@ const Search = () => {
       collection(db, "users"),
       where("displayName", "==", username)
     );
+    const q2 = query(
+      collection(db, "Room"),
+      where("nameroom", "==", username)
+    );
 
     try {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         setUser(doc.data());
+        setRoom(false);
+      });
+      const querySnapshot2 = await getDocs(q2);
+      querySnapshot2.forEach((doc) => {
+        setUser(doc.data());
+        setRoom(true);
       });
     } catch (err) {
       setErr(true);
@@ -47,7 +60,33 @@ const Search = () => {
         : user.uid + currentUser.uid;
     try {
       const res = await getDoc(doc(db, "chats", combinedId));
+      
+      if (room){
+        if (!res.exists()){
+        //create a chat in chats collection
+        await setDoc(doc(db, "chats", combinedId), { messages: [] });
 
+        //create user chats
+        await updateDoc(doc(db, "userChats", currentUser.uid), {
+          [combinedId + ".userInfo"]: {
+            uid: user.uid,
+            displayName: user.nameroom,
+            photoURL: user.photoURL,
+          },
+          [combinedId + ".date"]: serverTimestamp(),
+        });
+        //Add members
+        await updateDoc(doc(db, "Room", user.uid), {
+          members: arrayUnion({
+            uid: currentUser.uid,
+            displayName: currentUser.displayName,
+            datejoin: Timestamp.now(),
+            photoURL: currentUser.photoURL,
+          }),
+        });
+      }
+      }
+      else{
       if (!res.exists()) {
         //create a chat in chats collection
         await setDoc(doc(db, "chats", combinedId), { messages: [] });
@@ -71,9 +110,11 @@ const Search = () => {
           [combinedId + ".date"]: serverTimestamp(),
         });
       }
+    }
     } catch (err) {}
 
     setUser(null);
+    setRoom(false);
     setUsername("")
   };
   return (
@@ -81,7 +122,7 @@ const Search = () => {
       <div className="searchForm">
         <input
           type="text"
-          placeholder="Find a user"
+          placeholder="Encuentra un usuario"
           onKeyDown={handleKey}
           onChange={(e) => setUsername(e.target.value)}
           value={username}

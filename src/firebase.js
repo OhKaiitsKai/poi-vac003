@@ -6,12 +6,12 @@ import { getFirestore } from "firebase/firestore";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBZqIdbXzCsdKBEydu2Jjd6sZuAozJrJsA",
-  authDomain: "poi-pia-19b17.firebaseapp.com",
-  projectId: "poi-pia-19b17",
-  storageBucket: "poi-pia-19b17.appspot.com",
-  messagingSenderId: "726006062196",
-  appId: "1:726006062196:web:4e816006cf06108aa3c521",
+  apiKey: "AIzaSyAfnuv_bigvTugs2FJkT7vtHrmDZcpMLvA",
+  authDomain: "poi-pia-final.firebaseapp.com",
+  projectId: "poi-pia-final",
+  storageBucket: "poi-pia-final.appspot.com",
+  messagingSenderId: "687790632574",
+  appId: "1:687790632574:web:60c508805761f46ab0722f"
 };
 
 // Initialize Firebase

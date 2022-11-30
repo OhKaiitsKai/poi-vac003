@@ -208,7 +208,13 @@ img{
 &:hover{
   filter: brightness(1.5);
 }
-
+.setOpenModal{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
 
 }
     .search{

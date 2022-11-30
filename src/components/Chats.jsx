@@ -6,6 +6,7 @@ import { db } from "../firebase";
 
 const Chats = () => {
   const [chats, setChats] = useState([]);
+  //const [rooms, setRooms] = useState([]);
 
   const { currentUser } = useContext(AuthContext);
   const { dispatch } = useContext(ChatContext);
@@ -19,6 +20,15 @@ const Chats = () => {
       return () => {
         unsub();
       };
+    //const getRooms = () => {
+      //const unstor = onSnapshot(doc(db, "Room", currentUser.uid), (doc) => {
+       // setRooms(doc.data());
+     // });
+
+      //return () => {
+       // unstor();
+     // };
+    //}
     };
 
     currentUser.uid && getChats();
