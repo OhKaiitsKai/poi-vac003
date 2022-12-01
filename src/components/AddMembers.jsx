@@ -1,8 +1,8 @@
 import React from 'react';
 import "./Modal.scss";
-import AsyncSelect from 'react-select/async';
-import { collection, query, orderBy, startAt, endAt, getDocs } from "firebase/firestore";
-import {db} from '../firebase';
+//import AsyncSelect from 'react-select/async';
+//import { collection, query, orderBy, startAt, endAt, getDocs } from "firebase/firestore";
+//import {db} from '../firebase';
 
 function AddMembers({ setOpenModal }) {
     return (
