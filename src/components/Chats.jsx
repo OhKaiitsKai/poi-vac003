@@ -20,22 +20,13 @@ const Chats = () => {
       return () => {
         unsub();
       };
-    //const getRooms = () => {
-      //const unstor = onSnapshot(doc(db, "Room", currentUser.uid), (doc) => {
-       // setRooms(doc.data());
-     // });
-
-      //return () => {
-       // unstor();
-     // };
-    //}
     };
 
     currentUser.uid && getChats();
   }, [currentUser.uid]);
 
   const handleSelect = (u) => {
-    dispatch({ type: "CHANGE_USER", payload: u });
+    dispatch({ type: "CHANGE_USER", payload: u }, {});
   };
 
   return (

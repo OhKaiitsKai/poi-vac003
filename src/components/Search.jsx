@@ -60,7 +60,7 @@ const Search = () => {
         : user.uid + currentUser.uid;
     try {
       const res = await getDoc(doc(db, "chats", combinedId));
-      
+      //const res2 = await getDoc(doc(db, "chats", user.uid));
       if (room){
         if (!res.exists()){
         //create a chat in chats collection
@@ -117,6 +117,7 @@ const Search = () => {
     setRoom(false);
     setUsername("")
   };
+  
   return (
     <div className="search">
       <div className="searchForm">

@@ -24,7 +24,11 @@ import {
                 ? currentUser.uid + action.payload.uid
                 : action.payload.uid + currentUser.uid,
           };
-  
+        //case "CHANGE_ROOM":
+          //return {
+          //  user: action.payload,
+        //    chatId: action.payload.uid,
+      //    };
         default:
           return state;
       }
