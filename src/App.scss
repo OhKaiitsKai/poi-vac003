@@ -303,6 +303,7 @@ img{
       padding: 10px;
       height: calc(100% - 160px);
       overflow: scroll;
+      
 
       .message{
           display:flex;
@@ -329,6 +330,7 @@ img{
               display:flex;
               flex-direction: column;
               gap: 10px;
+              cursor:pointer;
 
               p{
                   background-color: white;
