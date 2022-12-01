@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
-//import CryptoJS from "crypto-js";
+import CryptoJS from "crypto-js";
 
 const Message = ({ message }) => {
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
 
-  //const [enc, setEnc]= useState(false);
+//  const [enc, setEnc]= useState(false);
 
   const ref = useRef();
 
@@ -15,19 +15,25 @@ const Message = ({ message }) => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   }, [message]);
 
-  //const encdec = async() => { 
+  const encdec = async() => {
+    //alert(message.text); 
   //if(enc){
-    //var ciphertext = CryptoJS.AES.encrypt(message.text, 'miClave').toString();
+    var ciphertext = CryptoJS.AES.encrypt(message.text, 'miClave').toString();
+    //message.text = CryptoJS.AES.encrypt(message.text, 'miClave').toString();
     //setEnc(true);
-    //return ciphertext;
-//}
+    //return message.text;
+   // return ciphertext;
+    //}
   //else{
-    //var bytes = CryptoJS.AES.decrypt(message.text, 'miClave');
-    //var decryptedData =bytes.toString(CryptoJS.enc.Utf8);
+    var bytes = CryptoJS.AES.decrypt(ciphertext, 'miClave');
+    var dihertext =bytes.toString(CryptoJS.enc.Utf8);
+    alert(ciphertext);
+    alert(dihertext);
+
     //setEnc(false);
-    //return decryptedData;
-  //}
-//}
+    //return message.text;
+    //  }
+      }
 
   return (
     <div
@@ -45,7 +51,7 @@ const Message = ({ message }) => {
         />
         <span>Justo ahora</span>
       </div>
-      <div className="messageContent">
+      <div className="messageContent" onClick={encdec}>
         <p>{message.text}</p>
         {message.img && <img src={message.img} alt="" />}
       </div>
