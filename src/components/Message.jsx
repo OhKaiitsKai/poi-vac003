@@ -25,9 +25,10 @@ const Message = ({ message }) => {
    // return ciphertext;
     //}
   //else{
-    var bytes = CryptoJS.AES.decrypt(message.text, 'miClave');
+    var bytes = CryptoJS.AES.decrypt(ciphertext, 'miClave');
     var dihertext =bytes.toString(CryptoJS.enc.Utf8);
-    alert(ciphertext, dihertext);
+    alert(ciphertext);
+    alert(dihertext);
 
     //setEnc(false);
     //return message.text;
